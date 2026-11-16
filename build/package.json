@@ -1,8 +1,8 @@
 {
-  "name": "bookshelf-src",
+  "name": "bookshelf-build",
   "private": true,
   "type": "module",
-  "description": "Build tooling for static/bookshelf: bundles third-party code the page loads",
+  "description": "Build tooling for Bookshelf: bundles third-party code the page loads",
   "scripts": {
     "build": "node build.mjs"
   },

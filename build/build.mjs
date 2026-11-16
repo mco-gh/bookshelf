@@ -1,8 +1,8 @@
-// Rebuild static/bookshelf/vendor/ after upgrading a dependency: `npm run build`.
+// Rebuild vendor/ after upgrading a dependency: `npm run build`.
 import { copyFile } from 'node:fs/promises';
 import { build } from 'esbuild';
 
-const out = new URL('../static/bookshelf/vendor/', import.meta.url);
+const out = new URL('../vendor/', import.meta.url);
 
 await build({
   entryPoints: ['vendor-entry.js'],
@@ -15,4 +15,4 @@ await build({
   legalComments: 'none',
 });
 await copyFile('node_modules/interestfor/src/interestfor.min.js', new URL('interestfor.min.js', out));
-console.log('Built static/bookshelf/vendor/');
+console.log('Built vendor/');
