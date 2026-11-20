@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
+  <script>try { const s = localStorage.getItem('bookshelf-scheme'); if (s === 'light' || s === 'dark') document.querySelector('meta[name="color-scheme"]').content = s; } catch {}</script>
   <meta name="theme-color" content="#fffaf2" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#14112b" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
@@ -20,13 +21,22 @@
       <a class="brand" href="#/">Bookshelf</a>
       <p class="credit">Made with ❤️ by <a href="https://mco.dev/">Marc</a><a class="apps-link" href="https://mco.dev/apps/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>All apps</a></p>
     </div>
-    <button type="button" class="icon-button info-button" command="show-modal" commandfor="about-dialog" aria-label="About Bookshelf">
-      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-        <circle cx="12" cy="12" r="9.5"/>
-        <path d="M12 11v6"/>
-        <circle cx="12" cy="7.4" r="0.6" fill="currentColor"/>
-      </svg>
-    </button>
+    <div class="header-actions">
+      <button type="button" class="icon-button info-button" command="show-modal" commandfor="settings-dialog" aria-label="Settings">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4.5v5M6 14.5v5"/>
+          <circle cx="16" cy="7" r="2"/>
+          <circle cx="8" cy="17" r="2"/>
+        </svg>
+      </button>
+      <button type="button" class="icon-button info-button" command="show-modal" commandfor="about-dialog" aria-label="About Bookshelf">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="9.5"/>
+          <path d="M12 11v6"/>
+          <circle cx="12" cy="7.4" r="0.6" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <main id="main">
@@ -120,6 +130,19 @@
   </main>
 
   <footer class="copyright">© 2026 Marc Cohen</footer>
+
+  <dialog id="settings-dialog" class="settings" closedby="any" aria-labelledby="settings-title">
+    <div class="dialog-head">
+      <h2 id="settings-title">Settings</h2>
+      <form method="dialog">
+        <button class="icon-button" aria-label="Close" autofocus>&times;</button>
+      </form>
+    </div>
+    <fieldset class="scheme-pick">
+      <legend>Appearance</legend>
+      <div class="segmented"><label><input type="radio" name="scheme" value="light dark"><span>System</span></label><label><input type="radio" name="scheme" value="light"><span>Light</span></label><label><input type="radio" name="scheme" value="dark"><span>Dark</span></label></div>
+    </fieldset>
+  </dialog>
 
   <dialog id="about-dialog" class="about" closedby="any" aria-labelledby="about-title">
     <div class="dialog-head">

@@ -312,3 +312,24 @@ function route() {
 
 addEventListener('hashchange', route);
 route();
+
+// ── Appearance: System, Light or Dark, saved in this browser. The choice is written
+// to <meta name="color-scheme">, which the stylesheet follows. ──
+{
+  const schemeMeta = document.querySelector('meta[name="color-scheme"]');
+  for (const input of document.querySelectorAll('input[name="scheme"]')) {
+    input.checked = input.value === schemeMeta.content;
+    input.addEventListener('change', () => {
+      schemeMeta.content = input.value;
+      try {
+        if (input.value === 'light dark') localStorage.removeItem('bookshelf-scheme');
+        else localStorage.setItem('bookshelf-scheme', input.value);
+      } catch { /* the choice still applies for this visit */ }
+    });
+  }
+}
+
+// Settings opens declaratively too; cover browsers without invoker commands.
+if (!('commandForElement' in HTMLButtonElement.prototype)) {
+  document.querySelector('[commandfor="settings-dialog"]').addEventListener('click', () => document.getElementById('settings-dialog').showModal());
+}

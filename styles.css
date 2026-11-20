@@ -29,7 +29,30 @@
   --spine-fill: rgb(255 226 61 / 0.38);
   --spine-stroke: #ffe23d;
 
+  /* Dark: from the system unless Light was chosen in Settings, or chosen outright. */
   @media (prefers-color-scheme: dark) {
+    &:not(:has(> head > meta[name="color-scheme"][content="light"])) {
+      --bg: #14112b;
+      --surface: #211c45;
+      --surface-tint: #2a2456;
+      --text: #f4f1ff;
+      --muted: #bcb6e0;
+      --border: #3b3472;
+      --control-border: #8d86bd;
+      --primary: #b9a0ff;
+      --primary-hover: #cdbaff;
+      --on-primary: #1c1140;
+      --link: #c7b3ff;
+      --danger: #ff8fab;
+      --shadow: 0 6px 20px rgb(0 0 0 / 0.35);
+      --shadow-lift: 0 10px 28px rgb(0 0 0 / 0.5);
+      --heading-gradient: linear-gradient(100deg, #c7b3ff 0%, #ff8cc0 60%, #ffc170 100%);
+      --glow-1: rgb(255 79 154 / 0.16);
+      --glow-2: rgb(47 168 255 / 0.14);
+      --glow-3: rgb(139 92 246 / 0.22);
+  }
+  }
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
     --bg: #14112b;
     --surface: #211c45;
     --surface-tint: #2a2456;
@@ -48,7 +71,7 @@
     --glow-1: rgb(255 79 154 / 0.16);
     --glow-2: rgb(47 168 255 / 0.14);
     --glow-3: rgb(139 92 246 / 0.22);
-  }
+    }
 
   color-scheme: light dark;
   accent-color: var(--primary);
@@ -918,3 +941,16 @@ input[type='password'] {
 /* Back to the list of all of Marc's apps, on its own line under the credit. */
 .apps-link { display: block; inline-size: fit-content; margin-block-start: 0.15rem; white-space: nowrap; }
 .apps-link svg { display: inline; inline-size: 1.05em; block-size: 1.05em; margin-inline-end: 0.25em; vertical-align: -0.18em; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Appearance: the setting writes <meta name="color-scheme">; map it back so the colors follow it. */
+:root:has(> head > meta[name="color-scheme"][content="light"]) { color-scheme: light; }
+:root:has(> head > meta[name="color-scheme"][content="dark"]) { color-scheme: dark; }
+.header-actions { display: flex; gap: 0.5rem; }
+.scheme-pick { margin: 1rem 0 0; padding: 0; border: 0; min-inline-size: 0; }
+.scheme-pick legend { padding: 0; margin-block-end: 0.6rem; font-weight: 700; }
+.segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface-tint); }
+.segmented label { position: relative; display: grid; }
+.segmented input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.segmented span { display: grid; place-items: center; min-block-size: 2.5rem; padding: 0 .4rem; border-radius: 999px; font-weight: 700; font-size: .92rem; color: var(--muted); }
+.segmented input:checked + span { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgb(0 0 0 / .15); }
+.segmented input:focus-visible + span { outline: 3px solid var(--primary); outline-offset: 1px; }
